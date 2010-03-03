@@ -180,7 +180,7 @@ import flash.geom.Rectangle;
 			if( (coreBounds.getX() + coreBounds.getWidth() <= thisBounds.getX()) ||
 				(coreBounds.getX() >= thisBounds.getX() + thisBounds.getWidth()) ||
 				(coreBounds.getY() + coreBounds.getHeight() <= thisBounds.getY()) ||
-				(coreBounds.getY() >= thisBounds.getY() + thisBounds.getY()) )
+				(coreBounds.getY() >= thisBounds.getY() + thisBounds.getHeight()) )
 				return false;
 			
 			//NOTE: at this point we know the two volumes overlap.

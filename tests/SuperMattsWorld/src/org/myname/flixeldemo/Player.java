@@ -69,4 +69,10 @@ public class Player extends FlxSprite
 		
 		super.update();
 	}
+	
+	public void kill()
+	{
+		super.kill();
+		FlxG.switchState(MenuState.class);
+	}
 }
