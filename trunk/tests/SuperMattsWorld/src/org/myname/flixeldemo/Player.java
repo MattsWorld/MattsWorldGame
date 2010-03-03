@@ -16,7 +16,7 @@ public class Player extends FlxSprite
 	protected static final int PLAYER_WIDTH_PX = 16;
 	protected static final int PLAYER_HEIGHT_PX = 16;
 	
-	protected static final int PLAYER_RUN_SPEED = 80;
+	protected static final int PLAYER_RUN_SPEED = 180;
 	protected static final float GRAVITY_ACCELERATION = 300; //-- 420
 	protected static final float JUMP_ACCELERATION = 300; //-- 400
 	
