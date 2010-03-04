@@ -16,6 +16,7 @@ import flash.geom.Point;
 		protected ArrayList<FlxSprite> _sprites;
 		protected float _timer;
 		protected int _particle;
+		protected FlxEmitterListener listener;
 		
 		//@desc		Constructor
 		//@param	X				The X position of the emitter
@@ -50,7 +51,14 @@ import flash.geom.Point;
 			delay = Delay;
 			
 			_sprites = null;
+			listener = null;
 			kill();
+		}
+		
+		public FlxEmitter setListener(FlxEmitterListener listener)
+		{
+			this.listener = listener;
+			return this;
 		}
 		
 		//@desc		This function attaches an existing array of sprites to this particle emitter
@@ -111,45 +119,48 @@ import flash.geom.Point;
 		//@desc		A more compact way of setting the width and height of the emitter
 		//@param	Width	The desired width of the emitter (particles are spawned randomly within these dimensions)
 		//@param	Height	The desired height of the emitter
-		public void setSize(int Width,int Height)
+		public FlxEmitter setSize(int Width,int Height)
 		{
 			width = Width;
 			height = Height;
+			return this;
 		}
 		
 		//@desc		A more compact way of setting the X velocity range of the emitter
 		//@param	Min		The minimum value for this range
 		//@param	Max		The maximum value for this range
-		public void setXVelocity(float Min,float Max)
+		public FlxEmitter setXVelocity(float Min,float Max)
 		{
 			minVelocity.x = Min;
 			maxVelocity.x = Max;
+			return this;
 		}
-		
-		public void setXVelocity() {setXVelocity(0, 0);}
 		
 		//@desc		A more compact way of setting the Y velocity range of the emitter
 		//@param	Min		The minimum value for this range
 		//@param	Max		The maximum value for this range
-		public void setYVelocity(float Min,float Max)
+		public FlxEmitter setYVelocity(float Min,float Max)
 		{
 			minVelocity.y = Min;
 			maxVelocity.y = Max;
+			return this;
 		}
-		
-		public void setYVelocity() {setYVelocity(0, 0);}
 		
 		//@desc		A more compact way of setting the angular velocity constraints of the emitter
 		//@param	Min		The minimum value for this range
 		//@param	Max		The maximum value for this range
-		public void setRotation(float Min,float Max)
+		public FlxEmitter setRotation(float Min,float Max)
 		{
 			minRotation = Min;
 			maxRotation = Max;
+			return this;
+		}	
+		
+		public FlxEmitter setGravity(float gravity)
+		{
+			this.gravity = gravity;
+			return this;
 		}
-		
-		public void setRotation() {setRotation(0, 0);}
-		
 		
 		//@desc		Called automatically by the game loop, decides when to launch particles and when to "die"
 		public void update()
@@ -173,7 +184,7 @@ import flash.geom.Point;
 		//@desc		Call this function to reset the emitter (if you used a negative delay, calling this function "explodes" the emitter again)
 		public void restart()
 		{
-			if(_sprites.equals(null))
+			if(_sprites == null)
 			{
 				FlxG.log("ERROR: You must attach sprites to an emitter for it to work.\nSee FlxEmitter.loadSprites() and FlxEmitter.createSprites() for more info.");
 				return;
@@ -212,6 +223,9 @@ import flash.geom.Point;
 			int sl = _sprites.size();
 			for(int i = 0; i < sl; i++)
 				((FlxSprite)_sprites.get(i)).exists = false;
+			
+			if (listener != null)
+				listener.emitterKilled(this);
 		}
 	}
 

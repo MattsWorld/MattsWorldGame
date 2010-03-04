@@ -31,6 +31,7 @@ public class Enemy extends FlxSprite
 			play("idle");
 			this.velocity.x = speed;
 		}
+
 		super.update();
 	}
 
@@ -40,6 +41,7 @@ public class Enemy extends FlxSprite
 
 		if(collidedX)
 		{
+			FlxG.play(R.raw.yup_yup);
 			this.speed = -this.speed;
 			this.velocity.x = this.speed;
 		}

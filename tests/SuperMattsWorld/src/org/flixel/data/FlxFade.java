@@ -40,7 +40,7 @@ package org.flixel.data;
 			visible = true;
 		}
 		
-		public void restart(int Color, float Duration) {restart(0, 1, null, false);}
+		public void restart(int Color, float Duration) {restart(Color, Duration, null, false);}
 		public void restart() {restart(0, 1, null, false);}
 		
 		//@desc		Updates and/or animates this special effect
