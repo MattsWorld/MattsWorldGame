@@ -6,6 +6,7 @@ import java.util.Arrays;
 import org.flixel.FlxEmitter;
 import org.flixel.FlxFadeListener;
 import org.flixel.FlxG;
+import org.flixel.FlxSound;
 import org.flixel.FlxSprite;
 
 import android.view.KeyEvent;
@@ -13,22 +14,22 @@ import android.view.KeyEvent;
 public class Player extends FlxSprite
 {
 	protected static final int PLAYER_START_X = 10;
-	protected static final int PLAYER_START_Y = 640-30;
+	private static final int PLAYER_START_Y = 640-30;
 
-	protected static final int PLAYER_WIDTH_PX = 16;
-	protected static final int PLAYER_HEIGHT_PX = 16;
+	private static final int PLAYER_WIDTH_PX = 16;
+	private static final int PLAYER_HEIGHT_PX = 16;
 
-	protected static final int PLAYER_RUN_SPEED = 180;
-	protected static final float GRAVITY_ACCELERATION = 300; //-- 420
-	protected static final float JUMP_ACCELERATION = 300; //-- 400
+	private static final int PLAYER_RUN_SPEED = 180;
+	private static final float GRAVITY_ACCELERATION = 300; //-- 420
+	private static final float JUMP_ACCELERATION = 300; //-- 400
 
-	protected FlxEmitter chunkies;
+	private static final FlxSound SOUND_DEATH = new FlxSound().loadEmbedded(R.raw.evil_laugh);
+
+	protected final FlxEmitter chunkies;
 
 	public Player()
 	{
 		super(PLAYER_START_X, PLAYER_START_Y, R.drawable.spaceman, true, PLAYER_WIDTH_PX, PLAYER_HEIGHT_PX);
-		//super.offset = new Point(16, 0);
-
 
 		drag.x = PLAYER_RUN_SPEED * 8;
 		acceleration.y = GRAVITY_ACCELERATION;
@@ -91,7 +92,7 @@ public class Player extends FlxSprite
 	{
 		super.kill();
 
-		FlxG.play(R.raw.evil_laugh);
+		SOUND_DEATH.play();
 		this.chunkies.x = this.x + (this.width>>1);
 		this.chunkies.y = this.y + (this.height>>1);
 		this.chunkies.restart();
