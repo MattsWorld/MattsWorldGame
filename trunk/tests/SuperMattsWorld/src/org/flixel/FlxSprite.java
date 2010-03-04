@@ -481,7 +481,8 @@ protected void calcFrame()
 	//Update display bitmap
 	_r.setX(rx);
 	_r.setY(ry);
-	_framePixels.copyPixels(source,_r,_pZero);
+	_framePixels.clearBitmap();
+	_framePixels.copyPixels(source, _r, _pZero);
 	_r.setX(0); _r.setY(0);
 	if(_ct != null) _framePixels.colorTransform(_r,_ct);
 	if(_callback != null) _callback.animationChanged(_curAnim.name,_curFrame,_caf);

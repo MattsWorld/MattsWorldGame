@@ -40,7 +40,7 @@ public class BitmapData
 	{
 		bitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
 		canvas = new Canvas(bitmap);
-		canvas.drawColor(color);
+		canvas.drawColor(color, PorterDuff.Mode.SRC);
 		updateVariables();
 	}
 	
@@ -55,18 +55,13 @@ public class BitmapData
 		Rect source = new Rect((int)sourceRect.left, (int)sourceRect.top, (int)sourceRect.right, (int)sourceRect.bottom);
 		Rect dest = new Rect((int)destPoint.x, (int)destPoint.y, (int)destPoint.x + (int)sourceRect.getWidth(), (int)destPoint.y + (int)sourceRect.getHeight());
 		
-		if (!mergeAlpha)
-		{
-			Paint clear = new Paint();
-			clear.setARGB(255, 0, 0, 0);
-			canvas.drawRect(dest, clear);
-		}
+		Paint paint = null;
 		
 		canvas.drawBitmap(
 				sourceBitmapData.getBitmap(), 
 				source,
 				dest,
-				null);
+				paint);
 	}
 	
 	public void copyPixels(BitmapData sourceBitmapData, Rectangle sourceRect, Point destPoint, BitmapData alphaBitmapData, Point alphaPoint)
@@ -90,6 +85,11 @@ public class BitmapData
 		paint.setColor(color);
 		canvas.drawRect(rect, paint);
 	}
+	
+	public void clearBitmap()
+	{
+		canvas.drawColor(0x00000000, PorterDuff.Mode.SRC);
+	}
 
 	public boolean hitTest(Point point, int i, Point point2) 
 	{
@@ -97,8 +97,7 @@ public class BitmapData
 	}
 
 	public void draw(BitmapData source, Matrix matrix, ColorTransform colorTransform, String blendMode, Rectangle clipRect, Boolean smoothing) 
-	{
-		
+	{		
 		Paint paint = null;
 		if (colorTransform != null)
 		{
@@ -106,6 +105,7 @@ public class BitmapData
 			paint.setARGB(colorTransform.alpha, colorTransform.red, colorTransform.green, colorTransform.blue);
 			paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
 		}
+
 		canvas.drawBitmap(source.getBitmap(), matrix, paint);
 	}
 	

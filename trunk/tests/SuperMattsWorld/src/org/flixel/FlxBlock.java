@@ -31,7 +31,7 @@ public class FlxBlock extends FlxCore
 	//@desc		Fills the block with a randomly arranged selection of graphics from the image provided
 	//@param	TileGraphic The graphic class that contains the tiles that should fill this block
 	//@param	Empties		The number of "empty" tiles to add to the auto-fill algorithm (e.g. 8 tiles + 4 empties = 1/3 of block will be open holes)
-	public void loadGraphic(int TileGraphic, int Empties)
+	public FlxBlock loadGraphic(int TileGraphic, int Empties)
 	{
 		//if(TileGraphic == null)
 			//return;
@@ -54,9 +54,11 @@ public class FlxBlock extends FlxCore
 			else
 				_rects.add(null);
 		}
+		
+		return this;
 	}
 	
-	public void loadGraphic(int TileGraphic) {loadGraphic(TileGraphic, 0);}
+	public FlxBlock loadGraphic(int TileGraphic) {return loadGraphic(TileGraphic, 0);}
 	
 	//@desc		Draws this block
 	public void render()

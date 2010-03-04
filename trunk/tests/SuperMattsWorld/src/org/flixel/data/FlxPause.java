@@ -11,11 +11,13 @@ public class FlxPause extends FlxLayer
 		scrollFactor.x = 0;
 		scrollFactor.y = 0;
 		
-		int w = 100;
-		int h = 92;
+		int w = 95;
+		int h = 160;
 		x = (FlxG.width-w)/2;
 		y = (FlxG.height-h)/2;
-		add((new FlxSprite()).createGraphic(w,h,0xaa000000,true),true);			
+		FlxSprite background = new FlxSprite().createGraphic(w,h,0xFF000000,true);
+		background.setAlpha(0.5f);
+		add(background,true);			
 		((FlxText)add(new FlxText(0,10,w,"PAUSED"), true)).setFormat(null,16,0xFFFFFFFF,Align.CENTER);
 		
 		int keypResource = FlxResourceManager.getDrawableResource("key_p");

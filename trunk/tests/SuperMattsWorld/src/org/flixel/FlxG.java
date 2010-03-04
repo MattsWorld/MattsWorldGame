@@ -133,7 +133,7 @@ import org.flixel.data.FlxKeyboard;
 		//@desc		Set up and autoplay a music track
 		//@param	Music		The sound file you want to loop in the background
 		//@param	Volume		How loud the sound should be, from 0 to 1
-		static public void playMusic(int Music,float Volume)
+		static public void playMusic(int Music,float Volume, boolean survives)
 		{
 			if(music == null)
 				music = new FlxSound();
@@ -141,11 +141,12 @@ import org.flixel.data.FlxKeyboard;
 				music.stop();
 			music.loadEmbedded(Music,true);
 			music.setVolume(Volume);
-			music.survive = true;
+			music.survive = survives;
 			music.play();
 		}
 		
-		static public void playMusic(int Music) {playMusic(Music, 1.0f);}
+		static public void playMusic(int Music) {playMusic(Music, 1.0f, false);}
+		static public void playMusic(int Music, float Volume) {playMusic(Music, Volume, false);}
 		
 		//@desc		Creates a new sound object from an embedded Class object
 		//@param	EmbeddedSound	The sound you want to play
@@ -738,9 +739,11 @@ import org.flixel.data.FlxKeyboard;
 		//@param	Force			Force the effect to reset
 		static public void fade(int Color, float Duration, FlxFadeListener FadeComplete, boolean Force)
 		{
-			//_game._fade.restart(Color,Duration,FadeComplete,Force);
+			_game._fade.restart(Color,Duration,FadeComplete,Force);
 		}
 		static public void fade(int Color) {fade(Color, 1, null, false);}
+		static public void fade(int Color, float Duration) {fade(Color, Duration, null, false);}
+		static public void fade(int Color, float Duration, FlxFadeListener FadeComplete) {fade(Color, Duration, FadeComplete, false);}
 		
 		//@desc		Set the mouse cursor to some graphic file
 		//@param	CursorGraphic	The image you want to use for the cursor

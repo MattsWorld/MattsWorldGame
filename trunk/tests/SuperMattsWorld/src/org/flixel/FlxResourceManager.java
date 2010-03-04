@@ -2,9 +2,9 @@ package org.flixel;
 
 import java.lang.reflect.Field;
 
-import flash.display.*;
-import android.content.*;
-import android.graphics.drawable.*;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import flash.display.BitmapData;
 
 public class FlxResourceManager 
 {
@@ -13,10 +13,11 @@ public class FlxResourceManager
 	
 	static BitmapData getImage(int resource)
 	{
-		Drawable drawable = context.getResources().getDrawable(resource);
-		BitmapData bitmapData = new BitmapData(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-		drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-		drawable.draw(bitmapData.getCanvas());
+		Drawable image = context.getResources().getDrawable(resource);
+		//Bitmap image = BitmapFactory.decodeResource(context.getResources(), resource);
+		BitmapData bitmapData = new BitmapData(image.getIntrinsicWidth(), image.getIntrinsicHeight());
+		image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
+		image.draw(bitmapData.getCanvas());
 		return bitmapData;
 	}
 	

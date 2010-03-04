@@ -326,8 +326,15 @@ public class FlxGame extends FlxCore
 			FlxG.doFollow();
 			_curState.update();
 			
+			_flash.update();
+			_fade.update();
+			_quake.update();
+			
 			//Render game content, special fx, and overlays
 			_curState.render();
+			
+			//_flash.render();
+			_fade.render();
 			
 			//Post-processing hook
 			_curState.postProcess();
