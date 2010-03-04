@@ -3,6 +3,7 @@ package org.myname.flixeldemo;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.flixel.FlxCore;
 import org.flixel.FlxEmitter;
 import org.flixel.FlxFadeListener;
 import org.flixel.FlxG;
@@ -107,5 +108,17 @@ public class Player extends FlxSprite
 			}
 		}
 		);
+	}
+	
+	public boolean collide(FlxCore Core)
+	{
+		boolean hx = super.collideX(Core);
+		boolean hy = super.collideY(Core);
+		
+		//Causes player to fall after hitting the bottom of a platform
+		if(hy && Core.hitCeiling())
+			velocity.y = JUMP_ACCELERATION;
+		
+		return hx || hy;
 	}
 }
