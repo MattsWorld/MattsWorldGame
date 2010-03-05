@@ -25,6 +25,7 @@ public class Player extends FlxSprite
 	private static final float JUMP_ACCELERATION = 300; //-- 400
 
 	private static final FlxSound SOUND_DEATH = new FlxSound().loadEmbedded(R.raw.evil_laugh);
+	private static final FlxSound JUMP = new FlxSound().loadEmbedded(R.raw.jumpsfx);
 
 	protected final FlxEmitter chunkies;
 
@@ -71,6 +72,7 @@ public class Player extends FlxSprite
 		if((FlxG.keys.justPressed(KeyEvent.KEYCODE_DPAD_UP) || FlxG.keys.justPressed(KeyEvent.KEYCODE_L)) && velocity.y==0)
 		{
 			velocity.y = -JUMP_ACCELERATION;
+			JUMP.play();
 		}
 
 		if(velocity.y != 0)
