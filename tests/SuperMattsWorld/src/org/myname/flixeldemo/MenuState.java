@@ -23,7 +23,7 @@ public class MenuState extends FlxState
 	public void update()
 	{
 		super.update();
-		if (FlxG.keys.justPressed(KeyEvent.KEYCODE_DPAD_CENTER))
+		if (FlxG.keys.justPressed(KeyEvent.KEYCODE_DPAD_CENTER) || FlxG.keys.justPressed(KeyEvent.KEYCODE_ENTER))
 			FlxG.switchState(GameState.class);
 	}
 }
