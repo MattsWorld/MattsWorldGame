@@ -23,8 +23,9 @@ public class GameState extends FlxState
 		FlxBlock evenHigherGround = new FlxBlock( 75, 640 - 100, 50, 16);
 		FlxBlock leftWall = new FlxBlock(340, 640-32, 16, 16);
 		FlxBlock rightWall = new FlxBlock(540, 640-32, 16, 16);
-		MovingBlock platform = new MovingBlock(50, 1, 0, 0, 150, 640-64, 90, 48);
-		MovingBlock squisher = new MovingBlock(98, 2, 0, 0, 275, 640-98, 75, 32);
+		MovingBlock platform = new MovingBlock(50, 1, 0, 0, 150, 640-64, 90, 48, false);
+		MovingBlock squisher = new MovingBlock(-98, 2, 0, 0, 275, 640-98, 75, 32, false);
+		MovingBlock tester = new MovingBlock(98, 2, 0, 0, 275, 640-98, 75, 32, false); //test changes
 
 		ground.loadGraphic(R.drawable.tech_tiles);
 		higherGround.loadGraphic(R.drawable.tech_tiles);
@@ -33,7 +34,9 @@ public class GameState extends FlxState
 		rightWall.loadGraphic(R.drawable.tech_tiles);
 		platform.loadGraphic(R.drawable.tech_tiles);
 		squisher.loadGraphic(R.drawable.tech_tiles);
+		tester.loadGraphic(R.drawable.tech_tiles);
 
+		movingBlocks.add(this.add(tester));
 		movingBlocks.add(this.add(platform));
 		movingBlocks.add(this.add(squisher));
 		highBlocks.add(this.add(higherGround));
