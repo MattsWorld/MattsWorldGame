@@ -36,7 +36,7 @@ public class AbstractLevel extends FlxState
 		FlxG.collideArrayList(stationaryBlocks, player);
 		FlxG.collideArrayList(movingBlocks, player);
 		FlxG.collideArrayList(hurtBlocks, player);
-		FlxG.collideArrayList(deathBlocks, player);
+		//FlxG.collideArrayList(deathBlocks, player);
 		FlxG.overlapArrayList(movingBlocks, player, new FlxCollideListener()
 		{
 			public void Collide(FlxCore object1, FlxCore object2)
@@ -77,8 +77,8 @@ public class AbstractLevel extends FlxState
 		/*
 		 * ENEMY COLLISIONS
 		 */
-		FlxG.collideArrayLists(stationaryBlocks, enemies);
-		FlxG.collideArrayLists(movingBlocks, enemies);
+		FlxG.collideArrayLists(enemies, stationaryBlocks);
+		FlxG.collideArrayLists(enemies, movingBlocks);
 		FlxG.overlapArrayList(enemies, player, new FlxCollideListener()
 		{
 			public void Collide(FlxCore object1, FlxCore object2)

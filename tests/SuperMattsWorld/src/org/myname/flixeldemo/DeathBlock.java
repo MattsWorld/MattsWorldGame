@@ -3,11 +3,13 @@ package org.myname.flixeldemo;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.flixel.*;
+import org.flixel.FlxBlock;
+import org.flixel.FlxCore;
+import org.flixel.FlxG;
 
 import flash.display.BitmapData;
 
-public class DeathBlock extends FlxCore
+public class DeathBlock extends FlxBlock
 {	
 	public enum BlockType
 	{
@@ -28,7 +30,8 @@ public class DeathBlock extends FlxCore
 	 * different than the height of the graphic
 	 */
 	public DeathBlock(int x, int y, int width, BlockType blockType)
-	{			
+	{
+		super(x, y, width, width);
 		this.type = blockType;
 		
 		switch(this.type)
