@@ -1,22 +1,17 @@
 package org.myname.flixeldemo;
 
-import java.util.ArrayList;
-
 import org.flixel.FlxBlock;
-import org.flixel.FlxCollideListener;
-import org.flixel.FlxCore;
 import org.flixel.FlxG;
-import org.flixel.FlxState;
+import org.myname.flixeldemo.abstraction.AbstractLevel;
 import org.myname.flixeldemo.DeathBlock.BlockType;
 
-public class GameState extends FlxState 
+public class GameState extends AbstractLevel 
 {
-	protected ArrayList<FlxBlock> levelBlocks = new ArrayList<FlxBlock>();
-	protected ArrayList<FlxBlock> highBlocks = new ArrayList<FlxBlock>();
-	protected ArrayList<MovingBlock> movingBlocks = new ArrayList<MovingBlock>();
-	protected ArrayList<DeathBlock> deathBlocks = new ArrayList<DeathBlock>(); 
-	protected ArrayList<Enemy> enemies	= new ArrayList<Enemy>();
-	protected Player player = null;
+//	protected ArrayList<FlxBlock> levelBlocks = new ArrayList<FlxBlock>();
+//	protected ArrayList<FlxBlock> highBlocks = new ArrayList<FlxBlock>();
+//	protected ArrayList<MovingBlock> movingBlocks = new ArrayList<MovingBlock>();
+//	protected ArrayList<Enemy> enemies	= new ArrayList<Enemy>();
+//	protected Player player = null;
 
 	public GameState()
 	{		
@@ -45,72 +40,64 @@ public class GameState extends FlxState
 		squisher.loadGraphic(R.drawable.tech_tiles);
 		tester.loadGraphic(R.drawable.tech_tiles);
 
-		deathBlocks.add(this.add(spike));
-		deathBlocks.add(this.add(water));
-		deathBlocks.add(this.add(flames));
-		movingBlocks.add(this.add(tester));
-		movingBlocks.add(this.add(platform));
-		movingBlocks.add(this.add(squisher));
-		highBlocks.add(this.add(higherGround));
-		highBlocks.add(this.add(evenHigherGround));
-		highBlocks.add(this.add(leftWall));
-		highBlocks.add(this.add(rightWall));
-		highBlocks.add(this.add(righterWall));
-		highBlocks.add(this.add(platformAboveDeath));
-		levelBlocks.add(this.add(ground));
+		super.deathBlocks.add(this.add(spike));
+		super.deathBlocks.add(this.add(water));
+		super.deathBlocks.add(this.add(flames));
+		super.movingBlocks.add(this.add(tester));
+		super.movingBlocks.add(this.add(platform));
+		super.movingBlocks.add(this.add(squisher));
+		super.stationaryBlocks.add(this.add(higherGround));
+		super.stationaryBlocks.add(this.add(evenHigherGround));
+		super.stationaryBlocks.add(this.add(leftWall));
+		super.stationaryBlocks.add(this.add(rightWall));
+		super.stationaryBlocks.add(this.add(ground));
+		super.stationaryBlocks.add(this.add(righterWall));
+		super.stationaryBlocks.add(this.add(platformAboveDeath));
 
-		player = new Player();
+		super.player = new Player();
 		this.add(player);
 		FlxG.follow(player, 2.5f);
 		FlxG.followAdjust(0.5f, 0.0f);
 		FlxG.followBounds(0, 0, 800, 640);
 
 		float enemySpeed = 50;
-		enemies.add(this.add(new Enemy(400, 640 - 50, enemySpeed, R.drawable.enemy)));
+		super.enemies.add(this.add(new Enemy(400, 640 - 50, enemySpeed, R.drawable.enemy)));
 
 		//FlxG.playMusic(R.raw.d3d);
 	}
 
-	public void update()
-	{
-		super.update();
-		
-		FlxG.collideArrayList(levelBlocks, player);
-		FlxG.collideArrayList(highBlocks, player);
-		FlxG.collideArrayList(movingBlocks, player);
-		FlxG.overlapArrayList(movingBlocks, player, new FlxCollideListener()
-		{
-			public void Collide(FlxCore object1, FlxCore object2)
-			{
-				player.kill();
-			}
-		}
-		);
-		FlxG.overlapArrayList(levelBlocks, player, new FlxCollideListener()
-		{
-			public void Collide(FlxCore object1, FlxCore object2)
-			{
-				player.kill();
-			}
-		}
-		);
-		FlxG.collideArrayLists(levelBlocks, enemies);
-		FlxG.collideArrayLists(enemies, highBlocks);
-		FlxG.overlapArrayList(enemies, player, new FlxCollideListener()
-		{
-			public void Collide(FlxCore object1, FlxCore object2)
-			{
-				player.kill();
-			}
-		}		
-		);
-		FlxG.overlapArrayList(deathBlocks, player, new FlxCollideListener()
-		{
-			public void Collide(FlxCore object1, FlxCore object2)
-			{
-				player.kill();
-			}
-		}
-		);
-	}
+//	public void update()
+//	{
+//		super.update();
+//		FlxG.collideArrayList(levelBlocks, player);
+//		FlxG.collideArrayList(highBlocks, player);
+//		FlxG.collideArrayList(movingBlocks, player);
+//		FlxG.overlapArrayList(movingBlocks, player, new FlxCollideListener()
+//		{
+//			public void Collide(FlxCore object1, FlxCore object2)
+//			{
+//				player.kill();
+//			}
+//		}
+//		);
+//		FlxG.overlapArrayList(levelBlocks, player, new FlxCollideListener()
+//		{
+//			public void Collide(FlxCore object1, FlxCore object2)
+//			{
+//				player.kill();
+//			}
+//		}
+//		);
+//		FlxG.collideArrayLists(levelBlocks, enemies);
+//		FlxG.collideArrayLists(enemies, highBlocks);
+//		FlxG.overlapArrayList(enemies, player, new FlxCollideListener()
+//		{
+//			public void Collide(FlxCore object1, FlxCore object2)
+//			{
+//				player.kill();
+//			}
+//		}		
+//		);
+//
+//	}
 }
