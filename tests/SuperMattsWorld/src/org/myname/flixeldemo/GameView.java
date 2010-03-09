@@ -2,14 +2,18 @@ package org.myname.flixeldemo;
 
 import org.flixel.FlxGame;
 import org.flixel.FlxGameView;
-import org.myname.flixeldemo.parsing.LevelParser;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 
 public class GameView extends FlxGameView 
 {
-	//-- TODO PARSER HERE.
+	/*
+	 * Made this public for outside use. May be moved in the future
+	 */
+	public static Resources res;
+
 	public GameView(Context context, AttributeSet attrs)
 	{
 		super(
@@ -18,6 +22,6 @@ public class GameView extends FlxGameView
 			attrs
 		);
 
-		LevelParser lp = new LevelParser(R.raw.lvl_test, super.getResources());
+		res = super.getResources();
 	}
 }

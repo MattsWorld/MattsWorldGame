@@ -15,7 +15,7 @@ import android.view.KeyEvent;
 public class Player extends FlxSprite
 {
 	protected static final int PLAYER_START_X = 10;
-	private static final int PLAYER_START_Y = 640-30;
+	private static final int PLAYER_START_Y = 640-230;
 
 	private static final int PLAYER_WIDTH_PX = 16;
 	private static final int PLAYER_HEIGHT_PX = 16;
