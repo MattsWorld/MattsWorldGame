@@ -28,7 +28,7 @@ public class LevelParser
 
 	/** Map for taking text resource names and converting them into the integer address value. */
 	public static final Map<String, Integer> KEY_RESOURCE_ADDR;
-
+	
 
 	static
 	{
@@ -39,7 +39,12 @@ public class LevelParser
 		temp.put("tech_tiles", R.drawable.tech_tiles);
 		temp.put("spaceman", R.drawable.spaceman);
 		temp.put("spike", R.drawable.spike);
+		temp.put("water", R.drawable.water);
 
+		temp.put("lvl_test", R.raw.lvl_test);
+		temp.put("lvl_test2", R.raw.lvl_test2);
+		temp.put("lvl_test3", R.raw.lvl_test3);
+		
 		/*
 		 * TODO - Add all resources that will be referenced as a memory
 		 * location in the Droid.
@@ -56,7 +61,7 @@ public class LevelParser
 
 		try
 		{
-			isr = new InputStreamReader(GameView.res.openRawResource(R.raw.lvl_test), Charset.forName("UTF-8"));
+			isr = new InputStreamReader(GameView.res.openRawResource(Level.nextLevel), Charset.forName("UTF-8"));
 			br = new BufferedReader(isr);
 			
 			State state = State.NONE;
