@@ -4,6 +4,7 @@ import org.flixel.FlxG;
 import org.flixel.FlxState;
 import org.flixel.FlxText;
 import org.myname.flixeldemo.parsing.Level;
+import org.myname.flixeldemo.parsing.LevelParser;
 
 import android.view.KeyEvent;
 
@@ -24,7 +25,8 @@ public class MenuState extends FlxState
 	public void update()
 	{
 		super.update();
+		//Level.nextLevel = R.raw.lvl_test2;
 		if (FlxG.keys.justPressed(KeyEvent.KEYCODE_DPAD_CENTER) || FlxG.keys.justPressed(KeyEvent.KEYCODE_ENTER))
-			FlxG.switchState(Level.class);
+			Level.switchLevel("lvl_test2","");  //FlxG.switchState(Level.class);
 	}
 }
