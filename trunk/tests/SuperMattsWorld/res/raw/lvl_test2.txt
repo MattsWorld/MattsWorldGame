@@ -6,7 +6,7 @@
 
 [level]
 #name width height default_block_type background
-lvl_test 2000 400 tech_tiles
+lvl_test2 2000 400 tech_tiles
 
 [middle_ground]
 # types randomness [0 100] 
@@ -28,7 +28,7 @@ umbrella 0
 
 [death_block]
 # x, y, width, height ... optionals: type
-100 375 48 16 spike
+100 375 48 16 water
 
 [enemy]
 #x, y, speed, type
