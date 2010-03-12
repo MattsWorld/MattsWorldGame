@@ -9,7 +9,7 @@ import org.flixel.FlxG;
 
 import flash.display.BitmapData;
 
-public class DeathBlock extends FlxBlock
+public class DeathBlock extends FlxCore
 {	
 	public enum BlockType
 	{
@@ -31,7 +31,6 @@ public class DeathBlock extends FlxBlock
 	 */
 	public DeathBlock(int x, int y, int width, BlockType blockType)
 	{
-		super(x, y, width, width);
 		this.type = blockType;
 		
 		switch(this.type)

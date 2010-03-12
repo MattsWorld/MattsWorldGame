@@ -61,7 +61,7 @@ public class GameState extends AbstractLevel
 		FlxG.followBounds(0, 0, 800, 640);
 
 		float enemySpeed = 50;
-		super.enemies.add(this.add(new Enemy(400, 640 - 50, enemySpeed, R.drawable.enemy)));
+		super.enemies.add(this.add(new KillableEnemy(400, 640 - 50, enemySpeed, R.drawable.enemy)));
 
 		//FlxG.playMusic(R.raw.d3d);
 	}
