@@ -50,7 +50,7 @@ public class Level extends FlxState
 	protected ArrayList<FlxBlock> movingBlocks = new ArrayList<FlxBlock>();
 	protected ArrayList<FlxBlock> stationaryBlocks = new ArrayList<FlxBlock>();
 	protected ArrayList<FlxBlock> hurtBlocks = new ArrayList<FlxBlock>();
-	protected ArrayList<FlxBlock> deathBlocks = new ArrayList<FlxBlock>();
+	protected ArrayList<FlxCore> deathBlocks = new ArrayList<FlxCore>();
 
 	public Level()
 	{
@@ -66,7 +66,7 @@ public class Level extends FlxState
 			for(Iterator<FlxBlock> it = hurtBlocks.iterator(); it.hasNext();)
 				super.add(it.next());
 	
-			for(Iterator<FlxBlock> it = deathBlocks.iterator(); it.hasNext();)
+			for(Iterator<FlxCore> it = deathBlocks.iterator(); it.hasNext();)
 				super.add(it.next());
 	
 			super.add(player);
@@ -89,7 +89,7 @@ public class Level extends FlxState
 			for(Iterator<FlxBlock> it = hurtBlocks.iterator(); it.hasNext();)
 				super.add(it.next());
 	
-			for(Iterator<FlxBlock> it = deathBlocks.iterator(); it.hasNext();)
+			for(Iterator<FlxCore> it = deathBlocks.iterator(); it.hasNext();)
 				super.add(it.next());
 			
 	
@@ -185,12 +185,7 @@ public class Level extends FlxState
 				//object1.visible = false;
 				((Enemy)object1).exists = false;
 				Level.switchLevel("lvl_test","");
-			}
-
-			
-		}
-		
-		
-		);
+			}		
+		});
 	}
 }

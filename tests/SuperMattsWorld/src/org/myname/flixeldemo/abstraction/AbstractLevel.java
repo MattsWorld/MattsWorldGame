@@ -23,7 +23,7 @@ public class AbstractLevel extends FlxState
 	protected ArrayList<FlxBlock> movingBlocks = new ArrayList<FlxBlock>();
 	protected ArrayList<FlxBlock> stationaryBlocks = new ArrayList<FlxBlock>();
 	protected ArrayList<FlxBlock> hurtBlocks = new ArrayList<FlxBlock>();
-	protected ArrayList<FlxBlock> deathBlocks = new ArrayList<FlxBlock>();
+	protected ArrayList<FlxCore> deathBlocks = new ArrayList<FlxCore>();
 
 	@Override
 	public void update()
@@ -81,13 +81,8 @@ public class AbstractLevel extends FlxState
 		FlxG.collideArrayLists(enemies, movingBlocks);
 		FlxG.overlapArrayList(enemies, player, new FlxCollideListener()
 		{
-			public void Collide(FlxCore object1, FlxCore object2)
-			{
-				//-- TODO Enemy specific code here... May want to kill the enemy or hurt the player
-				//   based on a series of instanceof statements. 
-				player.kill();
-			}
-		}		
-		);
+			//Need a collide listener otherwise overlapArrayList will kill the enemy and the player
+			public void Collide(FlxCore obj1, FlxCore obj2){}
+		});
 	}
 }
