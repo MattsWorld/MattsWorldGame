@@ -11,6 +11,7 @@ import java.util.Map;
 import org.flixel.FlxBlock;
 import org.myname.flixeldemo.Enemy;
 import org.myname.flixeldemo.GameView;
+import org.myname.flixeldemo.KillableEnemy;
 import org.myname.flixeldemo.MovingBlock;
 import org.myname.flixeldemo.Player;
 import org.myname.flixeldemo.R;
@@ -24,7 +25,7 @@ import flash.geom.Point;
  */
 public class LevelParser
 {
-	enum State{LEVEL, MIDDLE_GROUND, STATIONARY_BLOCK, MOVING_BLOCK, HURT_BLOCK, DEATH_BLOCK, ENEMY, LABEL, JUMP, POWER_UP, NONE}
+	enum State{LEVEL, MIDDLE_GROUND, STATIONARY_BLOCK, MOVING_BLOCK, HURT_BLOCK, DEATH_BLOCK, ENEMY, KENEMY, LABEL, JUMP, POWER_UP, NONE}
 
 	/** Map for taking text resource names and converting them into the integer address value. */
 	public static final Map<String, Integer> KEY_RESOURCE_ADDR;
@@ -36,12 +37,14 @@ public class LevelParser
 
 		temp.put("fire", R.drawable.fire);
 		temp.put("enemy", R.drawable.enemy);
+		temp.put("kenemy", R.drawable.enemy);
 		temp.put("tech_tiles", R.drawable.tech_tiles);
 		temp.put("spaceman", R.drawable.spaceman);
 		temp.put("spike", R.drawable.spike);
 		temp.put("water", R.drawable.water);
 
 		temp.put("lvl_test", R.raw.lvl_test);
+		temp.put("leveltest", R.raw.leveltest);
 		temp.put("lvl_test2", R.raw.lvl_test2);
 		temp.put("lvl_test3", R.raw.lvl_test3);
 		
@@ -107,7 +110,10 @@ public class LevelParser
 				{
 					state = State.ENEMY;
 					continue;
-					
+				}else if(str.equalsIgnoreCase("[kenemy]"))
+				{
+					state= State.KENEMY;
+					continue;
 				}else if(str.equalsIgnoreCase("[label]"))
 				{
 					state = State.LABEL;
@@ -219,7 +225,15 @@ public class LevelParser
 						 texture = KEY_RESOURCE_ADDR.get(strParts[3]);
 
 						 level.enemies.add(new Enemy(xInit, yInit, horizSpeed, texture));
-						
+					break;
+					
+					case KENEMY:
+						xInit = Integer.parseInt(strParts[0]);
+						yInit = Integer.parseInt(strParts[1]);
+						horizSpeed = Integer.parseInt(strParts[2]);
+						texture = KEY_RESOURCE_ADDR.get(strParts[3]);
+
+						level.kenemies.add(new KillableEnemy(xInit, yInit, horizSpeed, texture));
 					break;
 
 					case LABEL:
