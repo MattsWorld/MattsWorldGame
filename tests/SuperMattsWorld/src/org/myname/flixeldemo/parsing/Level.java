@@ -10,6 +10,7 @@ import org.flixel.FlxCore;
 import org.flixel.FlxG;
 import org.flixel.FlxState;
 import org.myname.flixeldemo.Enemy;
+import org.myname.flixeldemo.KillableEnemy;
 import org.myname.flixeldemo.Player;
 import org.myname.flixeldemo.R;
 
@@ -44,6 +45,7 @@ public class Level extends FlxState
 //	protected final ArrayList<FlxBlock> deathBlocks = new ArrayList<FlxBlock>();
 
 	protected ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	protected ArrayList<KillableEnemy> kenemies = new ArrayList<KillableEnemy>();
 	protected HashMap<String, Point> labels = new HashMap<String, Point>();
 	//-- TODO needs a container Object for inner variables.
 	protected ArrayList<Object> jump = new ArrayList<Object>();
@@ -72,6 +74,9 @@ public class Level extends FlxState
 			super.add(player);
 	
 			for(Iterator<Enemy> it = enemies.iterator(); it.hasNext();)
+				super.add(it.next());
+			
+			for(Iterator<KillableEnemy> it = kenemies.iterator(); it.hasNext();)
 				super.add(it.next());
 	
 			FlxG.follow(player, 2.5f);
@@ -186,6 +191,19 @@ public class Level extends FlxState
 				((Enemy)object1).exists = false;
 				Level.switchLevel("lvl_test","");
 			}		
+		});
+		
+		FlxG.collideArrayLists(kenemies, stationaryBlocks);
+		FlxG.collideArrayLists(kenemies, movingBlocks);
+		FlxG.overlapArrayList(kenemies, player, new FlxCollideListener()
+		{
+			public void Collide(FlxCore object1, FlxCore object2)
+			{
+				//object1.dead = true;
+				//object1.visible = false;
+				//((KillableEnemy)object1).exists = false;
+				((KillableEnemy)object1).kill();
+			}
 		});
 	}
 }
