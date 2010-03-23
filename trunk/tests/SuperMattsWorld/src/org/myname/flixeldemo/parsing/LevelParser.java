@@ -11,30 +11,35 @@ import java.util.Map;
 import org.flixel.FlxBlock;
 import org.myname.flixeldemo.Enemy;
 import org.myname.flixeldemo.GameView;
-import org.myname.flixeldemo.KillableEnemy;
+import org.myname.flixeldemo.JumpBlock;
 import org.myname.flixeldemo.MovingBlock;
 import org.myname.flixeldemo.Player;
 import org.myname.flixeldemo.R;
 
+import collectables.PowerUp;
+
 import flash.geom.Point;
 
 /**
+ * Parses Level data from text files. These files are used to create <code>Level</code>
+ * objects to run the game.
  * 
+ * 3/11/2010 - Tony Greer Implemented jump blocks and added lvl_jump_test
+ *  
  * @author Matt's World Design Team
- *
  */
-public class LevelParser
+public final class LevelParser
 {
-	enum State{LEVEL, MIDDLE_GROUND, STATIONARY_BLOCK, MOVING_BLOCK, HURT_BLOCK, DEATH_BLOCK, ENEMY, KENEMY, LABEL, JUMP, POWER_UP, NONE}
+	enum State{LEVEL, MIDDLE_GROUND, STATIONARY_BLOCK, MOVING_BLOCK, HURT_BLOCK, DEATH_BLOCK, ENEMY, LABEL, JUMP, POWER_UP, KENEMY, MUSIC, TIME, TEXT, NONE}
 
 	/** Map for taking text resource names and converting them into the integer address value. */
 	public static final Map<String, Integer> KEY_RESOURCE_ADDR;
 	
-
 	static
 	{
 		HashMap<String, Integer> temp = new HashMap<String, Integer>();
 
+		/* TEXTURES */
 		temp.put("fire", R.drawable.fire);
 		temp.put("enemy", R.drawable.enemy);
 		temp.put("kenemy", R.drawable.enemy);
@@ -42,18 +47,27 @@ public class LevelParser
 		temp.put("spaceman", R.drawable.spaceman);
 		temp.put("spike", R.drawable.spike);
 		temp.put("water", R.drawable.water);
+		temp.put("sand", R.drawable.sand);
+		temp.put("rock", R.drawable.rock);
+		temp.put("boulder", R.drawable.boulder);
 
+		/* LEVELS */
 		temp.put("lvl_test", R.raw.lvl_test);
-		temp.put("leveltest", R.raw.leveltest);
 		temp.put("lvl_test2", R.raw.lvl_test2);
 		temp.put("lvl_test3", R.raw.lvl_test3);
+		temp.put("lvl_jump_test", R.raw.lvl_jump_test);
+
+		/* MUSIC */
+		temp.put("d3d", R.raw.d3d);
+		temp.put("death1", R.raw.death1);
+		temp.put("death2", R.raw.death2);
+		//temp.put("", value)
 		
 		/*
 		 * TODO - Add all resources that will be referenced as a memory
 		 * location in the Droid.
-		 */	
-
-		KEY_RESOURCE_ADDR = Collections.unmodifiableMap(temp);		
+		 */
+		KEY_RESOURCE_ADDR = Collections.unmodifiableMap(temp);
 	}
 
 	public LevelParser(Level level)
@@ -126,6 +140,18 @@ public class LevelParser
 				{
 					state = State.POWER_UP;
 					continue;	
+				}else if(str.equalsIgnoreCase("[music]"))
+				{
+					state =State.MUSIC;
+					continue;
+				}else if(str.equalsIgnoreCase("[text]"))
+				{
+					state =State.TEXT;
+					continue;
+				}else if(str.equalsIgnoreCase("[time]"))
+				{
+					state =State.TIME;
+					continue;
 				}
 
 				/*
@@ -134,7 +160,7 @@ public class LevelParser
 				 */
 				String[] strParts = str.split("\\s+");
 				
-				String name;
+				String name, lvl_name, text;
 				int xInit, yInit, width, height,
 				maxXMovement, maxYMovement, horizSpeed, verticSpeed, texture;
 				switch(state)
@@ -225,15 +251,7 @@ public class LevelParser
 						 texture = KEY_RESOURCE_ADDR.get(strParts[3]);
 
 						 level.enemies.add(new Enemy(xInit, yInit, horizSpeed, texture));
-					break;
-					
-					case KENEMY:
-						xInit = Integer.parseInt(strParts[0]);
-						yInit = Integer.parseInt(strParts[1]);
-						horizSpeed = Integer.parseInt(strParts[2]);
-						texture = KEY_RESOURCE_ADDR.get(strParts[3]);
-
-						level.kenemies.add(new KillableEnemy(xInit, yInit, horizSpeed, texture));
+						
 					break;
 
 					case LABEL:
@@ -246,12 +264,48 @@ public class LevelParser
 					break;
 
 					case JUMP:
+						xInit = Integer.parseInt(strParts[0]);
+						yInit = Integer.parseInt(strParts[1]);
+						width = Integer.parseInt(strParts[2]);
+						height = Integer.parseInt(strParts[3]);
+						lvl_name = strParts[4];
+						name = strParts[5];
+						
+						//-- TODO Account for multiple visits
+						level.jump.add(new JumpBlock(xInit, yInit, width, height, lvl_name, name, true).loadGraphic(R.drawable.fire));
 
 					break;
 
 					case POWER_UP:
+						xInit = Integer.parseInt(strParts[0]);
+						yInit = Integer.parseInt(strParts[1]);
+						name = strParts[2];
 
+						level.powerUps.add(PowerUp.getInstance(xInit, yInit, name));
 					break;
+					
+					case MUSIC:
+						level.music = KEY_RESOURCE_ADDR.get(strParts[0]);
+					
+					break;
+
+					case TIME:
+						Level.timeRemaining = Float.parseFloat(strParts[0]);
+					
+					break;				
+					
+					case TEXT:
+						xInit = Integer.parseInt(strParts[0]);
+						yInit = Integer.parseInt(strParts[1]);
+						text = "";
+						for (int i = 2; i < strParts.length; i++)
+							text += strParts[i] + " ";
+						/*
+						 * TODO add to textBox for Storyboards
+						 */
+					
+					break;					
+
 
 					default:
 						throw new ParseException("F!", -1);
