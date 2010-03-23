@@ -8,20 +8,28 @@
 #name width height default_block_type background
 lvl_test 2000 400 tech_tiles
 
+[music]
+#name
+death1
+
+[time]
+#in seconds (to complete)
+60
+
 [middle_ground]
 # types randomness [0 100] 
 umbrella 0
 
 [stationary_block]
 # x, y, width, height ... optionals: type
-0 388 2000 16 tech_tiles
-100 200 400 16 tech_tiles
+0 388 2000 16 sand
+100 200 400 16 rock
 800 376 16 16 tech_tiles
 900 376 16 16 tech_tiles
 
 [moving_block]
 #init x, init y, width, height, max_x_from_init, max_y_from_init, horiz_speed, vert_speed ... optionals: type
-500 100 100 16 0 200 0 1 tech_tiles
+500 100 100 16 0 200 0 1 boulder
 
 #[hurt_block]
 # x, y, width, height, painlevel ... optionals: type
@@ -37,14 +45,18 @@ umbrella 0
 [label]
 #name x y  ... start is required
 start 25 240
+higher 150 184
 
-#[jump]
+[jump]
 # x y width height goto label
-#100 50 10 1000 storyboard1
-#2000 50 100 100 level2.start
-#1500 1000 10 10 level3.door1
+100 184 16 16 lvl_jump_test start
+2000 50 100 100 lvl_test2 start
+#1500 1000 10 10 level3 door1
 
 
-#[powerup]
-# x y type
+[power_up]
+200 184 cigarette
+216 184 beer
+233 184 beer
+250 184 beer
 #need list of power ups!!

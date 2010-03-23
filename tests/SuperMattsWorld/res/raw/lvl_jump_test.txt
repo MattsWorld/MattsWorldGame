@@ -1,0 +1,28 @@
+# Example of .lvl game level description file
+
+# Requirements
+# level name, level width and height ...
+# x, y measured from top left corner of level
+
+[level]
+#name width height default_block_type background
+lvl_jump_test 800 640 tech_tiles
+
+[middle_ground]
+# types randomness [0 100] 
+#umbrella 0
+
+[stationary_block]
+# x, y, width, height ... optionals: type
+0 624 150 16 tech_tiles
+#100 200 400 16 tech_tiles
+
+[label]
+#name x y  ... start is required
+start 16 608
+
+[jump]
+# x y width height goto label
+40 608 16 16 lvl_test higher
+#2000 50 100 100 level2 start
+#1500 1000 10 10 level3 door1

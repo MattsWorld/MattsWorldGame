@@ -8,6 +8,14 @@
 #name width height default_block_type background
 lvl_test3 2000 400 tech_tiles
 
+[music]
+#name
+death2
+
+[time]
+#in seconds (to complete)
+100
+
 [middle_ground]
 # types randomness [0 100] 
 umbrella 0

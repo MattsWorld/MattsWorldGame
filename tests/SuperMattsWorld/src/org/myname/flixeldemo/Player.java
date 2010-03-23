@@ -10,7 +10,6 @@ import org.flixel.FlxG;
 import org.flixel.FlxSound;
 import org.flixel.FlxSprite;
 import org.myname.flixeldemo.parsing.Level;
-import org.myname.flixeldemo.parsing.LevelParser;
 
 import android.view.KeyEvent;
 
@@ -102,6 +101,14 @@ public class Player extends FlxSprite
 		this.chunkies.y = this.y + (this.height>>1);
 		this.chunkies.restart();
 
+		//-- clear level saves so I am not always dead!!!
+		/* TODO
+		 * if implementing "lives", only clear current level and reset, so
+		 * Level.java will require a method to do this.
+		 * and only switch to menu when lives == 0
+		 */
+		Level.levelSaves.clear();
+
 		//-- Fade out for dramatic effect before
 		//   going back to the title screen.
 		FlxG.fade(0xffffffff, 2, new FlxFadeListener()
@@ -109,11 +116,8 @@ public class Player extends FlxSprite
 			public void fadeComplete()
 			{
 				FlxG.switchState(MenuState.class);
-				//Level.level_choice = R.raw.lvl_test3;
-				//FlxG.switchState(Level.class);
-				//Level.switchLevel("lvl_test3","");
 			}
-		}, true
+		}
 		);
 	}
 	
