@@ -14,6 +14,7 @@ public final class Beer extends PowerUp
 	protected Beer(int X, int Y, int Width, int Height)
 	{
 		super(X, Y, Width, Height);
+		super.loadGraphic(R.drawable.beer);
 	}
 
 	@Override

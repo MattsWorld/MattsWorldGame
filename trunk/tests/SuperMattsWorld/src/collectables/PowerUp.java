@@ -3,7 +3,6 @@ package collectables;
 import org.flixel.FlxBlock;
 import org.flixel.FlxCore;
 import org.myname.flixeldemo.Player;
-import org.myname.flixeldemo.R;
 
 public abstract class PowerUp extends FlxBlock
 {
@@ -34,15 +33,14 @@ public abstract class PowerUp extends FlxBlock
 	{
 		final PowerUp p;
 
+		/*
+		 * Instantiation should provide all the necessary prerequisites
+		 * for the power up to be placed on the screen.
+		 */
 		if(TYPE_CIGARETTE.equals(type))
-		{
 			p = new Cigarette(X, Y, 16, 16);
-			p.loadGraphic(R.drawable.cigarette);
-		}else if(TYPE_BEER.equals(type))
-		{
+		else if(TYPE_BEER.equals(type))
 			p = new Beer(X, Y, 16, 16);
-			p.loadGraphic(R.drawable.beer);
-		}
 		else if(TYPE_ENERGY_DRINK.equals(type))
 			p = new EnergyDrink(X, Y, 16, 16);
 		else

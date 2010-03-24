@@ -36,7 +36,11 @@ public final class LevelParser
 	public static final Map<String, Integer> KEY_RESOURCE_ADDR;
 	
 	static
-	{
+	{		
+		/*
+		 * TODO - Add all resources that will be referenced as a memory
+		 * location in the Droid.
+		 */
 		HashMap<String, Integer> temp = new HashMap<String, Integer>();
 
 		/* TEXTURES */
@@ -44,7 +48,7 @@ public final class LevelParser
 		temp.put("enemy", R.drawable.enemy);
 		temp.put("kenemy", R.drawable.enemy);
 		temp.put("tech_tiles", R.drawable.tech_tiles);
-		temp.put("spaceman", R.drawable.spaceman);
+		temp.put("matt", R.drawable.matt);
 		temp.put("spike", R.drawable.spike);
 		temp.put("water", R.drawable.water);
 		temp.put("sand", R.drawable.sand);
@@ -58,15 +62,12 @@ public final class LevelParser
 		temp.put("lvl_jump_test", R.raw.lvl_jump_test);
 
 		/* MUSIC */
-		temp.put("d3d", R.raw.d3d);
+		//temp.put("d3d", R.raw.d3d);
 		temp.put("death1", R.raw.death1);
 		temp.put("death2", R.raw.death2);
+		temp.put("music1", R.raw.level1_music);
 		//temp.put("", value)
-		
-		/*
-		 * TODO - Add all resources that will be referenced as a memory
-		 * location in the Droid.
-		 */
+
 		KEY_RESOURCE_ADDR = Collections.unmodifiableMap(temp);
 	}
 

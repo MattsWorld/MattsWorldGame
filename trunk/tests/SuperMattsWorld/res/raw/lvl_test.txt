@@ -10,7 +10,7 @@ lvl_test 2000 400 tech_tiles
 
 [music]
 #name
-death1
+music1
 
 [time]
 #in seconds (to complete)
@@ -45,7 +45,7 @@ umbrella 0
 [label]
 #name x y  ... start is required
 start 25 240
-higher 150 184
+higher 150 160
 
 [jump]
 # x y width height goto label
