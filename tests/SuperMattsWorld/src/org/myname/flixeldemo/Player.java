@@ -18,21 +18,27 @@ public class Player extends FlxSprite
 	protected static final int PLAYER_START_X = 10;
 	private static final int PLAYER_START_Y = 640-230;
 
-	private static final int PLAYER_WIDTH_PX = 16;
-	private static final int PLAYER_HEIGHT_PX = 16;
+	private static final int PLAYER_WIDTH_PX = 32;
+	private static final int PLAYER_HEIGHT_PX = 32;
 
 	private static final int PLAYER_RUN_SPEED = 180;
 	private static final float GRAVITY_ACCELERATION = 300; //-- 420
-	private static final float JUMP_ACCELERATION = 300; //-- 400
+	private static final float JUMP_ACCELERATION = 270; //-- 400
 
-	private static final FlxSound SOUND_DEATH = new FlxSound().loadEmbedded(R.raw.evil_laugh);
+	private static final FlxSound SOUND_DEATH = new FlxSound().loadEmbedded(R.raw.death1);
 	private static final FlxSound JUMP = new FlxSound().loadEmbedded(R.raw.jumpsfx);
 
-	protected final FlxEmitter chunkies;
+	/* Add to state! */
+	public final FlxEmitter chunkies = new FlxEmitter(0, 0, -1.5f)
+	.setXVelocity(-150.0f, 150.0f)
+	.setYVelocity(-200.0f, 0.0f)
+	.setRotation(-720, 720)
+	.setGravity(400f)
+	.createSprites(R.drawable.cigarette);
 
 	public Player()
 	{
-		super(PLAYER_START_X, PLAYER_START_Y, R.drawable.spaceman, true, PLAYER_WIDTH_PX, PLAYER_HEIGHT_PX);
+		super(PLAYER_START_X, PLAYER_START_Y, R.drawable.matt, true, PLAYER_WIDTH_PX, PLAYER_HEIGHT_PX);
 
 		drag.x = PLAYER_RUN_SPEED * 8;
 		acceleration.y = GRAVITY_ACCELERATION;
@@ -40,21 +46,12 @@ public class Player extends FlxSprite
 		maxVelocity.y = JUMP_ACCELERATION;
 
 		addAnimation("idle", new ArrayList<Integer>(Arrays.asList(new Integer[] {0})));
-		addAnimation("run",  new ArrayList<Integer>(Arrays.asList(new Integer[] {1, 2, 3, 0})), 12);
-		addAnimation("jump",  new ArrayList<Integer>(Arrays.asList(new Integer[] {5})));
+		addAnimation("run",  new ArrayList<Integer>(Arrays.asList(new Integer[] {1, 2})), 16);
+		addAnimation("jump",  new ArrayList<Integer>(Arrays.asList(new Integer[] {3})));
 		//addAnimation("idle_up",  new ArrayList<Integer>(Arrays.asList(new Integer[] {5})));
 		//addAnimation("run_up",  new ArrayList<Integer>(Arrays.asList(new Integer[] {6, 7, 8, 5})), 12);
 		//addAnimation("jump_up",  new ArrayList<Integer>(Arrays.asList(new Integer[] {9})));
 		//addAnimation("jump_down",  new ArrayList<Integer>(Arrays.asList(new Integer[] {10})));
-
-		this.chunkies = new FlxEmitter(0, 0, -1.5f)
-		.setXVelocity(-150.0f, 150.0f)
-		.setYVelocity(-200.0f, 0.0f)
-		.setRotation(-720, 720)
-		.setGravity(400f)
-		.createSprites(R.drawable.fire);
-
-		FlxG.state.add(chunkies);
 	}
 
 	public void update()

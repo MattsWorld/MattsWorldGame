@@ -19,10 +19,10 @@ lvl_jump_test 800 640 tech_tiles
 
 [label]
 #name x y  ... start is required
-start 16 608
+start 32 580
 
 [jump]
 # x y width height goto label
-40 608 16 16 lvl_test higher
+70 608 16 16 lvl_test higher
 #2000 50 100 100 level2 start
 #1500 1000 10 10 level3 door1

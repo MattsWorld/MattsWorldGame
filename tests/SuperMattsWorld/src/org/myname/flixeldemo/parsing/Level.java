@@ -73,7 +73,7 @@ public class Level extends FlxState
 		/*
 		 * TODO play music
 		 */
-		if (music != 0 && false)
+		if (music != 0)
 			FlxG.playMusic(music);
 
 	
@@ -226,6 +226,7 @@ public class Level extends FlxState
 			super.add(it.next());
 
 		super.add(player);
+		super.add(player.chunkies);
 
 		for(Iterator<Enemy> it = enemies.iterator(); it.hasNext();)
 			super.add(it.next());
