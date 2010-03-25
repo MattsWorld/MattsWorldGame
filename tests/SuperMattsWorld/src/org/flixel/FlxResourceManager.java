@@ -11,7 +11,7 @@ public class FlxResourceManager
 	static public Context context = null;
 	static public Class<? extends Object> R = null;
 	
-	static BitmapData getImage(int resource)
+	public static BitmapData getImage(int resource)
 	{
 		Drawable image = context.getResources().getDrawable(resource);
 		//Bitmap image = BitmapFactory.decodeResource(context.getResources(), resource);

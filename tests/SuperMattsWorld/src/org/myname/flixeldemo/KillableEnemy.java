@@ -1,33 +1,21 @@
 package org.myname.flixeldemo;
 
-import org.flixel.FlxCore;
-
+//--A killable enemy that moves sideways
 public class KillableEnemy extends Enemy
 {
-	protected final int VELOCITY_AFTER_KILL = -150;
 	public KillableEnemy(int startX, int startY, float horizontalSpeed, int SimpleGraphic)
 	{
 		super(startX, startY, horizontalSpeed, SimpleGraphic);
+		this.killable = true;
 	}
 	
-	public boolean overlaps(FlxCore Core)
+	public void update()
 	{
-		boolean overlaps = super.overlaps(Core);
-		//if the player overlaps the enemy
-		if(overlaps && Core.getClass() == Player.class)
+		if(this.onScreen())
 		{
-			//check for overlap from the top
-			if(this.collideY(Core))
-			{
-				this.kill();
-				this.exists = false;
-				((Player)Core).velocity.y = VELOCITY_AFTER_KILL;
-			}
-			else
-			{
-				Core.kill();
-			}
+			this.velocity.x = speed;
 		}
-		return overlaps;
+
+		super.update();
 	}
 }
