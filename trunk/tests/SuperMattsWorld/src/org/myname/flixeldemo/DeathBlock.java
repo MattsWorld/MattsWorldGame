@@ -3,22 +3,13 @@ package org.myname.flixeldemo;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.flixel.FlxBlock;
 import org.flixel.FlxCore;
 import org.flixel.FlxG;
 
 import flash.display.BitmapData;
 
 public class DeathBlock extends FlxCore
-{	
-	public enum BlockType
-	{
-		water,
-		fire,
-		spike
-	}
-	
-	protected BlockType type;
+{		
 	protected ArrayList<AnimatedBlock> blocks = new ArrayList<AnimatedBlock>();
 	
 	/*
@@ -29,45 +20,37 @@ public class DeathBlock extends FlxCore
 	 * is animated). Height cannot be specified because will cause issues if the height specified is
 	 * different than the height of the graphic
 	 */
-	public DeathBlock(int x, int y, int width, BlockType blockType)
+	public DeathBlock(int x, int y, int width, Integer Graphic)
 	{
-		this.type = blockType;
+		BitmapData pixels = FlxG.addBitmap(Graphic, false);
 		
-		switch(this.type)
+		int numberOfFrames = pixels.width / pixels.height;
+
+		if(numberOfFrames > 1)
 		{
-			case water:
-				this.createAnimatedDeathBlock(x, y, width, R.drawable.water, new Integer[] {0, 1});
-				break;
-			case fire:
-				this.createAnimatedDeathBlock(x, y, width, R.drawable.flame, new Integer[] {0, 1, 2});
-				break;
-			case spike:
-				this.createNonAnimatedDeathBlock(x, y, width, R.drawable.spike);
-				break;
+			//animated deathblock
+			Integer[] imageFrames = new Integer[numberOfFrames];
+			for(int i = 0; i < numberOfFrames; i++)
+			{
+				imageFrames[i] = i;
+			}
+			ArrayList<Integer> Frames = new ArrayList<Integer>(Arrays.asList(imageFrames));
+			
+			int widthOfBlock = pixels.width / numberOfFrames;
+			int numberOfBlocks = width / widthOfBlock;
+			for(int i = 0; i < numberOfBlocks; i++)
+			{
+				blocks.add(new AnimatedBlock(x + i*widthOfBlock, y, widthOfBlock, pixels.height));
+				blocks.get(i).loadGraphic(Graphic, true, widthOfBlock, pixels.height);
+				blocks.get(i).addAnimation("idle", Frames, 2);
+			}
 		}
-	}
-	
-	private void createAnimatedDeathBlock(int x, int y, int width, Integer TileGraphic, Integer[] imageFrames)
-	{
-		BitmapData pixels = FlxG.addBitmap(TileGraphic, false);
-		int widthOfBlock = pixels.width / imageFrames.length;
-		int numberOfBlocks = width / widthOfBlock;
-		
-		ArrayList<Integer> Frames = new ArrayList<Integer>(Arrays.asList(imageFrames));
-		for(int i = 0; i < numberOfBlocks; i++)
+		else
 		{
-			blocks.add(new AnimatedBlock(x + i*widthOfBlock, y, widthOfBlock, pixels.height));
-			blocks.get(i).loadGraphic(TileGraphic, true, widthOfBlock, pixels.height);
-			blocks.get(i).addAnimation("idle", Frames, 2);
+			//non-animated deathblock
+			blocks.add(new AnimatedBlock(x, y, width, pixels.height));
+			blocks.get(0).loadGraphic(Graphic);
 		}
-	}
-	
-	private void createNonAnimatedDeathBlock(int x, int y, int width, Integer TileGraphic)
-	{		
-		BitmapData pixels = FlxG.addBitmap(TileGraphic, false);
-		
-		blocks.add(new AnimatedBlock(x, y, width, pixels.height));
-		blocks.get(0).loadGraphic(TileGraphic);
 	}
 	
 	public void update()
