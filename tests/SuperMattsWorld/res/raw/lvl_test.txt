@@ -4,59 +4,78 @@
 # level name, level width and height ...
 # x, y measured from top left corner of level
 
+
 [level]
 #name width height default_block_type background
-lvl_test 2000 400 tech_tiles
+lvl_test 8000 500 sand
 
 [music]
-#name
 music1
-
-[time]
-#in seconds (to complete)
-60
 
 [middle_ground]
 # types randomness [0 100] 
-umbrella 0
+
 
 [stationary_block]
 # x, y, width, height ... optionals: type
-0 388 2000 16 sand
-100 200 400 16 rock
-800 376 16 16 tech_tiles
-900 376 16 16 tech_tiles
+#page 1
+0 416 640 200
+256 352 32 64
+448 320 64 96 rock
+#page 2
+640 416 624 200
+912 208 96 192
+1168 384 32 32
+1232 384 32 32
+#page 3
 
 [moving_block]
 #init x, init y, width, height, max_x_from_init, max_y_from_init, horiz_speed, vert_speed ... optionals: type
-500 100 100 16 0 200 0 1 boulder
+#page 1
+544 240 64 16 304 0 3 0 rock
+#page 2
+1200 288 32 32 0 96 0 1 rock
+#page 3
 
-#[hurt_block]
+
+[hurt_block]
 # x, y, width, height, painlevel ... optionals: type
+
 
 [death_block]
 # x, y, width, height ... optionals: type
-100 375 48 16 spike
+
+
 
 [enemy]
-#x, y, speed, type
-850 240 50 enemy
+#x, y, horizontal speed, type
+#page 1
+416 368 10 enemy
+576 368 10 enemy
+#page 2
+736 384 10 enemy
+#page 3
+
 
 [label]
 #name x y  ... start is required
-start 25 240
-higher 150 160
+start 32 350
+
 
 [jump]
 # x y width height goto label
-100 184 16 16 lvl_jump_test start
-2000 50 100 100 lvl_test2 start
-#1500 1000 10 10 level3 door1
 
 
 [power_up]
-200 184 cigarette
-216 184 beer
-233 184 beer
-250 184 beer
-#need list of power ups!!
+# x y type
+#page 1
+256 320 cigarette
+272 320 cigarette
+#page 2
+992 208 cigarette
+1200 400 beer
+#page 2
+
+#page 3
+
+
