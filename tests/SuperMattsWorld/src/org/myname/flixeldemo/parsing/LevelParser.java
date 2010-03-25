@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.flixel.FlxBlock;
 import org.myname.flixeldemo.BouncingEnemy;
+import org.myname.flixeldemo.DeathBlock;
 import org.myname.flixeldemo.Enemy;
 import org.myname.flixeldemo.GameView;
 import org.myname.flixeldemo.JumpBlock;
@@ -52,6 +53,7 @@ public final class LevelParser
 		temp.put("matt", R.drawable.matt);
 		temp.put("spike", R.drawable.spike);
 		temp.put("water", R.drawable.water);
+		temp.put("flame", R.drawable.flame);
 		temp.put("sand", R.drawable.sand);
 		temp.put("rock", R.drawable.rock);
 		temp.put("boulder", R.drawable.boulder);
@@ -237,13 +239,18 @@ public final class LevelParser
 						 xInit = Integer.parseInt(strParts[0]);
 						 yInit = Integer.parseInt(strParts[1]);
 						 width = Integer.parseInt(strParts[2]);
+						 /*
+						  * It is not currently possible to set the height of a deathblock due to
+						  * issues with the appearance and animation. We need to come up with a way 
+						  * to use height in a future version.
+						  */
 						 height = Integer.parseInt(strParts[3]);
 						 texture = level.defaultTexture;
 
 						if(strParts.length == 5)
 							texture = KEY_RESOURCE_ADDR.get(strParts[4]);
 						
-						level.deathBlocks.add(new FlxBlock(xInit, yInit, width, height).loadGraphic(texture));
+						level.deathBlocks.add(new DeathBlock(xInit, yInit, width, texture));
 					break;
 
 					case ENEMY:
