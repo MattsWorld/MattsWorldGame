@@ -171,12 +171,13 @@ public class Level extends FlxState
 		FlxG.collideArrayLists(enemies, movingBlocks);
 		FlxG.overlapArrayList(enemies, player, new FlxCollideListener()
 		{
+			/*
+			 * Enemy specific handling is done in the enemy classes. 
+			 * An empty collide function is needed so the default overlaps function doesn't kill 
+			 *		the enemy and the player automatically.
+			*/
 			public void Collide(FlxCore object1, FlxCore object2)
-			{
-				//-- TODO Enemy specific code here... May want to kill the enemy or hurt the player
-				//   based on a series of instanceof statements. 
-				player.kill();
-			}
+			{}
 		}		
 		);
 

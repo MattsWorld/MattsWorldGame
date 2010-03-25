@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.flixel.FlxBlock;
+import org.myname.flixeldemo.BouncingEnemy;
 import org.myname.flixeldemo.Enemy;
 import org.myname.flixeldemo.GameView;
 import org.myname.flixeldemo.JumpBlock;
@@ -250,8 +251,16 @@ public final class LevelParser
 						 yInit = Integer.parseInt(strParts[1]);
 						 horizSpeed = Integer.parseInt(strParts[2]);
 						 texture = KEY_RESOURCE_ADDR.get(strParts[3]);
-
-						 level.enemies.add(new Enemy(xInit, yInit, horizSpeed, texture));
+						 
+						 /*
+						  * 		----Temporary change for consistency----
+						  * 
+						  * Due to the redesign of the enemy classes, a BouncingEnemy
+						  * must be used here to have the same effect as the old version of Enemy.
+						  * The vertical speed is set to 0 so the enemy will only move horizontally.
+						  * If we used the current Enemy class, the enemy would not move horizontally at all.
+						  */
+						 level.enemies.add(new BouncingEnemy(xInit, yInit, horizSpeed, 0, texture));
 						
 					break;
 
