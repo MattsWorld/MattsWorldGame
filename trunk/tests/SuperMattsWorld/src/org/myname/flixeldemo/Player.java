@@ -22,14 +22,14 @@ public class Player extends FlxSprite
 	private static final int PLAYER_HEIGHT_PX = 32;
 
 	private static final int PLAYER_RUN_SPEED = 180;
-	private static final float GRAVITY_ACCELERATION = 300; //-- 420
-	private static final float JUMP_ACCELERATION = 270; //-- 400
+	private static final float GRAVITY_ACCELERATION = 420; //-- 420
+	private static final float JUMP_ACCELERATION = 400; //-- 400
 
 	private static final FlxSound SOUND_DEATH = new FlxSound().loadEmbedded(R.raw.death1);
 	private static final FlxSound JUMP = new FlxSound().loadEmbedded(R.raw.jumpsfx);
 
 	/* Add to state! */
-	public final FlxEmitter chunkies = new FlxEmitter(0, 0, -1.5f)
+	public static final FlxEmitter chunkies = new FlxEmitter(0, 0, -1.5f)
 	.setXVelocity(-150.0f, 150.0f)
 	.setYVelocity(-200.0f, 0.0f)
 	.setRotation(-720, 720)
@@ -94,9 +94,9 @@ public class Player extends FlxSprite
 		super.kill();
 
 		SOUND_DEATH.play();
-		this.chunkies.x = this.x + (this.width>>1);
-		this.chunkies.y = this.y + (this.height>>1);
-		this.chunkies.restart();
+		chunkies.x = this.x + (this.width>>1);
+		chunkies.y = this.y + (this.height>>1);
+		chunkies.restart();
 
 		//-- clear level saves so I am not always dead!!!
 		/* TODO
