@@ -7,10 +7,8 @@
 
 [level]
 #name width height default_block_type background
-lvl_test 8000 500 sand
+lvl_test 8000 464 sand
 
-[music]
-music1
 
 [middle_ground]
 # types randomness [0 100] 
@@ -23,20 +21,60 @@ music1
 256 352 32 64
 448 320 64 96 rock
 #page 2
-640 416 624 200
-912 208 96 192
+640 416 640 200
+912 224 96 192
 1168 384 32 32
-1232 384 32 32
+1248 384 32 32
 #page 3
+1280 416 144 200
+1392 336 32 80
+1520 416 400 200  
+1520 288 48 128
+1728 384 32 32
+1824 256 96 160
+1824 240 16 16
+1904 240 16 16
+#page 4
+1920 416 96 20
+2064 432 16 200
+2064 416 16 15 rock
+2160 432 32 200
+2150 416 32 16 rock
+2272 464 160 200
+2272 336 16 112
+2336 336 96 112
+#page 5
+2688 416 48 200
+2880 304 128 200
+2880 288 16 16
+3008 208 64 400
+3072 416 128 200
+#page 6
+3200 416 64 200
+3248 400 16 16 rock
+3360 416 32 200
+3360 400 32 16 rock
+3488 416 353 200 rock
+3600 336 240 80 
+3664 128 144 208
+3456 272 32 16
+3408 144 32 32
 
 [moving_block]
 #init x, init y, width, height, max_x_from_init, max_y_from_init, horiz_speed, vert_speed ... optionals: type
 #page 1
 544 240 64 16 304 0 3 0 rock
 #page 2
-1200 288 32 32 0 96 0 1 rock
+1200 288 48 32 0 96 0 1 rock
 #page 3
-
+#page 4
+2496 336 64 16 160 0 3 0
+#page 5
+2720 338 64 16 96 0 3 0 rock
+#page 6
+3424 336 32 32 96 0 3 0 rock
+3456 288 32 16 48 64 3 3 rock
+3488 128 32 16 176 0 3 0
 
 [hurt_block]
 # x, y, width, height, painlevel ... optionals: type
@@ -44,18 +82,41 @@ music1
 
 [death_block]
 # x, y, width, height ... optionals: type
-
+#page 3
+1424 448 96 96 water
+#page 4
+2016 464 256 100 water
+2432 464 128 100 water
+#page 5
+2560 448 320 100 water
+#page 6
+3264 448 224 100 water
+3264 432 96 16 fire
+3392 432 96 16 fire
 
 
 [enemy]
 #x, y, horizontal speed, type
 #page 1
-416 368 10 enemy
-576 368 10 enemy
+416 368 0 enemy
+576 368 0 enemy
 #page 2
-736 384 10 enemy
+736 384 0 enemy
 #page 3
-
+1616 384 15 enemy
+1664 384 15 enemy
+1840 224 15 enemy
+#page 4
+2160 384 0 enemy
+2336 304 0 enemy
+#page 5
+2896 272 15 enemy 
+2960 272 15 enemy
+3040 176 0 enemy
+3104 384 15 enemy
+#page 6
+3568 384 0 enemy
+3696 96 0 enemy
 
 [label]
 #name x y  ... start is required
@@ -73,9 +134,20 @@ start 32 350
 272 320 cigarette
 #page 2
 992 208 cigarette
-1200 400 beer
-#page 2
-
+1216 400 beer
 #page 3
-
+1520 272 cigarette
+1552 272 cigarette
+#page 4
+2064 400 cigarette
+2304 432 beer
+#page 5
+2704 400 cigarette
+2720 400 cigarette
+#page 6
+3360 384 cigarette
+3372 384 cigarette
+3408 128 beer
+3456 176 cigarette
+3472 176 cigarette
 
