@@ -62,7 +62,7 @@ public class FlxGameView
             }         
         }
         
-        boolean doKeyDown(int keyCode, KeyEvent msg) 
+        public boolean doKeyDown(int keyCode, KeyEvent msg) 
         {
             synchronized (surfaceHolder) 
             {
@@ -72,7 +72,7 @@ public class FlxGameView
             return true;
     	}
         
-        boolean doKeyUp(int keyCode, KeyEvent msg) 
+        public boolean doKeyUp(int keyCode, KeyEvent msg) 
         {
             synchronized (surfaceHolder) 
             {
