@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-<org.myname.flixeldemo.GameView
-      android:id="@+id/game"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"/> 
-</LinearLayout>
+    android:splitMotionEvents="true">
+	<org.myname.flixeldemo.GameView
+	      android:id="@+id/game"
+	      android:layout_width="fill_parent"
+	      android:layout_height="fill_parent"/>
+	
+	<Button android:id="@+id/left"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	   	android:layout_alignParentLeft="true"
+	    android:text="left" />
+	<Button android:id="@+id/right"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	   	android:layout_alignParentRight="true"
+	    android:text="right"/>
+	<Button android:id="@+id/space"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	   	android:layout_centerHorizontal="true"
+	    android:text="space"/>
+		<Button android:id="@+id/centerdpad"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@id/space"
+	    android:text="center"/>
+</RelativeLayout>
